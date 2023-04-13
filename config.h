@@ -6,7 +6,7 @@
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
 static char *font = "Liberation Mono:pixelsize=15:antialias=true:autohint=true";
-static char *font2[] = {"JoyPixels:pixelsize=10:antialias=true:autohint=true"};
+static char *font2[] = {"JoyPixels:pixelsize=20:antialias=true:autohint=true"};
 static int borderpx = 2;
 
 /*
@@ -195,25 +195,20 @@ static MouseShortcut mshortcuts[] = {
 static Shortcut shortcuts[] = {
 	/* mask                 keysym          function        argument */
 	{ XK_ANY_MOD,           XK_Break,       sendbreak,      {.i =  0} },
-	{ ControlMask,          XK_Print,       toggleprinter,  {.i =  0} },
-	{ ShiftMask,            XK_Print,       printscreen,    {.i =  0} },
-	{ XK_ANY_MOD,           XK_Print,       printsel,       {.i =  0} },
-	{ TERMMOD,              XK_Prior,       zoom,           {.f = +1} },
-	{ TERMMOD,              XK_Next,        zoom,           {.f = -1} },
-	{ TERMMOD,              XK_Home,        zoomreset,      {.f =  0} },
-	{ MODKEY,               XK_c,           clipcopy,       {.i =  0} },
-	{ MODKEY,               XK_v,           clippaste,      {.i =  0} },
-	{ CTRLMOD,              XK_c,           selpaste,       {.i =  0} },
-	{ CTRLMOD,              XK_v,           selpaste,       {.i =  0} },
-	{ TERMMOD,              XK_Num_Lock,    numlock,        {.i =  0} },
-	{ MODKEY,               XK_Page_Up,     kscrollup,      {.i = -1} },
-	{ MODKEY,               XK_Page_Down,   kscrolldown,    {.i = -1} },
+	//{ ControlMask,          XK_Print,       toggleprinter,  {.i =  0} },
+	//{ ShiftMask,            XK_Print,       printscreen,    {.i =  0} },
+	//{ XK_ANY_MOD,           XK_Print,       printsel,       {.i =  0} },
+	//{ MODKEY,               XK_Num_Lock,    numlock,        {.i =  0} },
 	{ MODKEY,               XK_k,           kscrollup,      {.i =  1} },
 	{ MODKEY,               XK_j,           kscrolldown,    {.i =  1} },
-	{ ControlMask|MODKEY,   XK_u,           kscrollup,      {.i =  4} },
-	{ ControlMask|MODKEY,   XK_d,           kscrolldown,    {.i =  4} },
+	{ ControlMask|MODKEY,   XK_k,           kscrollup,      {.i =  4} },
+	{ ControlMask|MODKEY,   XK_j,           kscrolldown,    {.i =  4} },
+	{ MODKEY,               XK_Home,        zoomreset,      {.f =  0} },
 	{ TERMMOD,              XK_K,           zoom,           {.f = +1} },
 	{ TERMMOD,              XK_J,           zoom,           {.f = -1} },
+	{ MODKEY,               XK_c,           clipcopy,       {.i =  0} },
+	{ MODKEY,               XK_v,           clippaste,      {.i =  0} },
+ 	{ MODKEY,               XK_l,           copyurl,        {.i =  0} },
 };
 
 /*
