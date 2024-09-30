@@ -5,10 +5,18 @@
  *
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
-static char *font = "Liberation Mono:pixelsize=15:antialias=true:autohint=true";
+// static char *font = "Liberation Mono:pixelsize=15:antialias=true:autohint=true";
+
+//static char *font = "Liberation Mono:pixelsize=15:antialias=true:autohint=true";
+static char *font = "LiterationMonoNerdFont:pixelsize=15:antialias=true:autohint=true"; //static char *font = "mono:pixelsize=12:antialias=true:autohint=true";
+
+
+//static char *font = "NotoColorEmoji:pixelsize=20:antialias=true:autohint=true";
 static char *font2[] = {
 	//"JoyPixels:pixelsize=20:antialias=true:autohint=true"
-	"NotoColorEmoji:pixelsize=20:antialias=true:autohint=true"
+	//"LiterationMonoNerdFont:pixelsize=15:antialias=true:autohint=true",
+	"NotoColorEmoji:pixelsize=20:antialias=true:autohint=true",
+	//"ttf-liberation-mono-nerd:pixelsize=15:antialias=true:autohint=true"
 };
 static int borderpx = 2;
 
