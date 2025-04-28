@@ -5,9 +5,19 @@
  *
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
+// static char *font = "Liberation Mono:pixelsize=15:antialias=true:autohint=true";
 
-static char *font = "Liberation Mono:pixelsize=15:antialias=true:autohint=true";
-static char *font2[] = {"JoyPixels:pixelsize=10:antialias=true:autohint=true"};
+//static char *font = "Liberation Mono:pixelsize=15:antialias=true:autohint=true";
+static char *font = "LiterationMonoNerdFont:pixelsize=15:antialias=true:autohint=true"; //static char *font = "mono:pixelsize=12:antialias=true:autohint=true";
+
+
+//static char *font = "NotoColorEmoji:pixelsize=20:antialias=true:autohint=true";
+static char *font2[] = {
+	//"JoyPixels:pixelsize=20:antialias=true:autohint=true"
+	//"LiterationMonoNerdFont:pixelsize=15:antialias=true:autohint=true",
+	"NotoColorEmoji:pixelsize=20:antialias=true:autohint=true",
+	//"ttf-liberation-mono-nerd:pixelsize=15:antialias=true:autohint=true"
+};
 static int borderpx = 2;
 
 /*
@@ -96,38 +106,73 @@ char *termname = "st-256color";
 unsigned int tabspaces = 4;
 
 /* bg opacity */
-float alpha = 0.8;
+float alpha = 1;
 
-/* Terminal colors (16 first used in escape sequence) */
+// NOTE: tokyonight colors 
 static const char *colorname[] = {
-	/* 8 normal colors */
-	"black",
-	"red3",
-	"green3",
-	"yellow3",
-	"blue2",
-	"magenta3",
-	"cyan3",
-	"gray90",
+    /* 8 normal colors */
+    "#15161e",
+    "#f7768e",
+    "#9ece6a",
+    "#e0af68",
+    "#7aa2f7",
+    "#bb9af7",
+    "#7dcfff",
+    "#a9b1d6",
 
-	/* 8 bright colors */
-	"gray50",
-	"red",
-	"green",
-	"yellow",
-	"#5c5cff",
-	"magenta",
-	"cyan",
-	"white",
+    /* 8 bright colors */
+    "#414868",
+    "#f7768e",
+    "#9ece6a",
+    "#e0af68",
+    "#7aa2f7",
+    "#bb9af7",
+    "#7dcfff",
+    "#c0caf5",
 
-	[255] = 0,
+    [255] = 0,
 
-	/* more colors can be added after 255 to use with DefaultXX */
-	"#cccccc",
-	"#555555",
-	"gray90", /* default foreground colour */
-	"black", /* default background colour */
+    /* more colors can be added after 255 to use with DefaultXX */
+    "#c0caf5",     
+    "#33467c",
+    "#c0caf5", /* default foreground colour */
+    "#1a1b26", /* default background colour */
 };
+
+
+
+// NOTE: these colors are the ones I used before, I just want to keep a backup
+//
+/* Terminal colors (16 first used in escape sequence) */
+// static const char *colorname[] = {
+// 	/* 8 normal colors */
+// 	"black",
+// 	"red3",
+// 	"green3",
+// 	"yellow3",
+// 	"blue2",
+// 	"magenta3",
+// 	"cyan3",
+// 	"gray90",
+//
+// 	/* 8 bright colors */
+// 	"gray50",
+// 	"red",
+// 	"green",
+// 	"yellow",
+// 	"#5c5cff",
+// 	"magenta",
+// 	"cyan",
+// 	"white",
+//
+// 	[255] = 0,
+//
+// 	/* more colors can be added after 255 to use with DefaultXX */
+// 	"#cccccc",
+// 	"#555555",
+// 	"gray90", /* default foreground colour */
+// 	"black", /* default background colour */
+// };
 
 
 /*
@@ -179,42 +224,44 @@ static uint forcemousemod = ShiftMask;
  * Internal mouse shortcuts.
  * Beware that overloading Button1 will disable the selection.
  */
-static MouseShortcut mshortcuts[] = {
-	/* mask                 button   function        argument       release */
-	{ XK_ANY_MOD,           Button2, selpaste,       {.i = 0},      1 },
-	{ ShiftMask,            Button4, ttysend,        {.s = "\033[5;2~"} },
-	{ XK_ANY_MOD,           Button4, ttysend,        {.s = "\031"} },
-	{ ShiftMask,            Button5, ttysend,        {.s = "\033[6;2~"} },
-	{ XK_ANY_MOD,           Button5, ttysend,        {.s = "\005"} },
-};
+
 /* Internal keyboard shortcuts. */
 #define MODKEY Mod1Mask
 #define TERMMOD (Mod1Mask|ShiftMask)
 #define CTRLSHIFT (ShiftMask|ControlMask)
 #define CTRLMOD (Mod1Mask|ControlMask)
 
+static MouseShortcut mshortcuts[] = {
+	/* mask                 button   function        argument       release */
+	{ MODKEY,               Button4, kscrollup,      {.i = 4} },
+	{ MODKEY,               Button5, kscrolldown,    {.i = 4} },
+	{ ControlMask|MODKEY,   Button4, kscrollup,      {.i = 16} },
+	{ ControlMask|MODKEY,   Button5, kscrolldown,    {.i = 16} },
+	{ XK_ANY_MOD,           Button2, selpaste,       {.i = 0},      1 },
+	//{ ShiftMask,            Button4, ttysend,        {.s = "\033[5;2~"} },
+	//{ ShiftMask,            Button5, ttysend,        {.s = "\033[6;2~"} },
+	//{ XK_ANY_MOD,           Button4, ttysend,        {.s = "\031"} },
+	//{ XK_ANY_MOD,           Button5, ttysend,        {.s = "\005"} },
+};
+
 static Shortcut shortcuts[] = {
 	/* mask                 keysym          function        argument */
 	{ XK_ANY_MOD,           XK_Break,       sendbreak,      {.i =  0} },
-	{ ControlMask,          XK_Print,       toggleprinter,  {.i =  0} },
-	{ ShiftMask,            XK_Print,       printscreen,    {.i =  0} },
-	{ XK_ANY_MOD,           XK_Print,       printsel,       {.i =  0} },
-	{ TERMMOD,              XK_Prior,       zoom,           {.f = +1} },
-	{ TERMMOD,              XK_Next,        zoom,           {.f = -1} },
-	{ TERMMOD,              XK_Home,        zoomreset,      {.f =  0} },
-	{ MODKEY,               XK_c,           clipcopy,       {.i =  0} },
-	{ MODKEY,               XK_v,           clippaste,      {.i =  0} },
-	{ CTRLMOD,              XK_c,           selpaste,       {.i =  0} },
-	{ CTRLMOD,              XK_v,           selpaste,       {.i =  0} },
-	{ TERMMOD,              XK_Num_Lock,    numlock,        {.i =  0} },
-	{ MODKEY,               XK_Page_Up,     kscrollup,      {.i = -1} },
-	{ MODKEY,               XK_Page_Down,   kscrolldown,    {.i = -1} },
+	//{ ControlMask,          XK_Print,       toggleprinter,  {.i =  0} },
+	//{ ShiftMask,            XK_Print,       printscreen,    {.i =  0} },
+	//{ XK_ANY_MOD,           XK_Print,       printsel,       {.i =  0} },
+	//{ MODKEY,               XK_Num_Lock,    numlock,        {.i =  0} },
+
 	{ MODKEY,               XK_k,           kscrollup,      {.i =  1} },
 	{ MODKEY,               XK_j,           kscrolldown,    {.i =  1} },
-	{ ControlMask|MODKEY,   XK_u,           kscrollup,      {.i =  4} },
-	{ ControlMask|MODKEY,   XK_d,           kscrolldown,    {.i =  4} },
+	{ ControlMask|MODKEY,   XK_k,           kscrollup,      {.i =  4} },
+	{ ControlMask|MODKEY,   XK_j,           kscrolldown,    {.i =  4} },
+	{ MODKEY,               XK_Home,        zoomreset,      {.f =  0} },
 	{ TERMMOD,              XK_K,           zoom,           {.f = +1} },
 	{ TERMMOD,              XK_J,           zoom,           {.f = -1} },
+	{ MODKEY,               XK_c,           clipcopy,       {.i =  0} },
+	{ MODKEY,               XK_v,           clippaste,      {.i =  0} },
+ 	{ MODKEY,               XK_l,           copyurl,        {.i =  0} },
 };
 
 /*
