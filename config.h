@@ -219,7 +219,6 @@ static unsigned int defaultattr = 11;
  */
 static uint forcemousemod = ShiftMask;
 
-
 /*
  * Internal mouse shortcuts.
  * Beware that overloading Button1 will disable the selection.
@@ -244,6 +243,12 @@ static MouseShortcut mshortcuts[] = {
 	//{ XK_ANY_MOD,           Button5, ttysend,        {.s = "\005"} },
 };
 
+/* things that do stuff */
+static char *openurlcmd[] = { "/bin/sh", "-c", "st-urlhandler -o", "externalpipe", NULL };
+static char *copyurlcmd[] = { "/bin/sh", "-c", "st-urlhandler -c", "externalpipe", NULL };
+static char *copyoutput[] = { "/bin/sh", "-c", "st-copyout", "externalpipe", NULL };
+static char *editscreen[] = { "/bin/sh", "-c", "st-editscreen", "externalpipe", NULL };
+
 static Shortcut shortcuts[] = {
 	/* mask                 keysym          function        argument */
 	{ XK_ANY_MOD,           XK_Break,       sendbreak,      {.i =  0} },
@@ -261,7 +266,10 @@ static Shortcut shortcuts[] = {
 	{ TERMMOD,              XK_J,           zoom,           {.f = -1} },
 	{ MODKEY,               XK_c,           clipcopy,       {.i =  0} },
 	{ MODKEY,               XK_v,           clippaste,      {.i =  0} },
- 	{ MODKEY,               XK_l,           copyurl,        {.i =  0} },
+	{ MODKEY,               XK_l,           externalpipe,   {.v = openurlcmd } },
+	{ MODKEY,               XK_y,           externalpipe,   {.v = copyurlcmd } },
+	{ MODKEY,               XK_o,           externalpipe,   {.v = copyoutput } },
+	{ MODKEY,               XK_e,           externalpipe,   {.v = editscreen } },
 };
 
 /*
