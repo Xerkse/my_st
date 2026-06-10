@@ -8,7 +8,7 @@
 // static char *font = "Liberation Mono:pixelsize=15:antialias=true:autohint=true";
 
 //static char *font = "Liberation Mono:pixelsize=15:antialias=true:autohint=true";
-static char *font = "LiterationMonoNerdFont:pixelsize=15:antialias=true:autohint=true"; //static char *font = "mono:pixelsize=12:antialias=true:autohint=true";
+static char *font = "JetBrainsMonoNerdFont:pixelsize=15:antialias=true:autohint=true"; //static char *font = "mono:pixelsize=12:antialias=true:autohint=true";
 
 
 //static char *font = "NotoColorEmoji:pixelsize=20:antialias=true:autohint=true";
